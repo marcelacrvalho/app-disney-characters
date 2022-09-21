@@ -15,7 +15,6 @@ class HomeView extends StatelessWidget {
   }
 
   Widget _body() {
-    List data = ['Nome 1', 'Nome 2'];
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -27,7 +26,7 @@ class HomeView extends StatelessWidget {
           AspectRatio(
             aspectRatio: 0.8,
             child: PageView.builder(
-                itemCount: data.length,
+                itemCount: HomeController.to.listCharacters?.length ?? 0,
                 physics: const ClampingScrollPhysics(),
                 controller: HomeController.to.pageController,
                 itemBuilder: (context, index) {
@@ -45,14 +44,38 @@ class HomeView extends StatelessWidget {
       builder: (context, child) {
         double value = 0.0;
         if (HomeController.to.pageController.position.haveDimensions) {
-          value = index.toDouble() - (HomeController.to.pageController.page ?? 0);
+          value =
+              index.toDouble() - (HomeController.to.pageController.page ?? 0);
           value = (value * 0.038).clamp(-1, 1);
         }
         return Transform.rotate(
           angle: pi * value,
-          child: const CustomCarouselWidget(),
+          child: FutureBuilder(
+            future: HomeController.to.fetch(),
+            builder: (context, snapshot) {
+              return _switchFutureBuilder(snapshot, index);
+            },
+          ),
         );
       },
+    );
+  }
+
+  Widget _switchFutureBuilder(AsyncSnapshot snapshot, index) {
+    switch (snapshot.connectionState) {
+      case ConnectionState.none:
+      case ConnectionState.waiting:
+        return const Center(child: CircularProgressIndicator());
+      case ConnectionState.done:
+      case ConnectionState.active:
+        return _charactersList(index);
+    }
+  }
+
+  Widget _charactersList(index) {
+    return CustomCarouselWidget(
+      image: HomeController.to.listCharacters![index].imageUrl!,
+      name: HomeController.to.listCharacters![index].name!,
     );
   }
 }
