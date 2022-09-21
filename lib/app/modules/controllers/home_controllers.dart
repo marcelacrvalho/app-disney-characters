@@ -9,8 +9,10 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    pageController =
-        PageController(initialPage: _currentPage, viewportFraction: 0.8);
+    pageController = PageController(
+      initialPage: _currentPage,
+      viewportFraction: 0.8,
+    );
     super.onInit();
   }
 
@@ -19,4 +21,6 @@ class HomeController extends GetxController {
     pageController.dispose();
     super.dispose();
   }
+
+  void getCharacterData() {}
 }
