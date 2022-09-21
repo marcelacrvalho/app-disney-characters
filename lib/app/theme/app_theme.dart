@@ -22,11 +22,11 @@ final ThemeData appThemeData = ThemeData(
   ),
   textTheme: TextTheme(
     titleLarge: TextStyle(
-      color: appThemeData.primaryColorDark,
+      color: Colors.black,
       fontSize: 22.0,
     ),
     bodyMedium: TextStyle(
-      color: appThemeData.primaryColorDark,
+      color: Colors.black,
       fontSize: 14.0,
     ),
   ),
