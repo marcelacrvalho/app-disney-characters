@@ -7,7 +7,7 @@ class CustomCarouselWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[
+      children: [
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -17,7 +17,7 @@ class CustomCarouselWidget extends StatelessWidget {
                 onTap: () {},
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: appThemeData.primaryColorLight,
                     borderRadius: BorderRadius.circular(30),
                     // image: DecorationImage(
                     //     image: AssetImage(
