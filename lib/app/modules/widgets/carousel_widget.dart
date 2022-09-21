@@ -1,10 +1,9 @@
-import 'package:disney/app/data/models/character.dart';
 import 'package:disney/app/modules/controllers/home_controllers.dart';
 import 'package:disney/app/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomCarouselWidget extends StatelessWidget {
-  final String image;
+  final String? image;
   final String name;
 
   const CustomCarouselWidget({Key? key, required this.image, required this.name})
@@ -28,7 +27,7 @@ class CustomCarouselWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                   image: DecorationImage(
                     image: NetworkImage(
-                      image,
+                      image ?? HomeController.to.imageNotFound,
                     ),
                     fit: BoxFit.fill,
                   ),
