@@ -22,5 +22,5 @@ class HomeController extends GetxController {
     super.dispose();
   }
 
-  void getCharacterData() {}
+  void fetch() {}
 }
